@@ -1,6 +1,7 @@
 # Table of contents
 
-* [Network Redundancy](README.md)
+* [SEC440: Systems Security](README.md)
+* [Network Redundancy](<README (1).md>)
 * [Web and Proxy Redundancy](web-and-proxy-redundancy.md)
 * [Web Application and Database Redundancy](web-application-and-database-redundancy.md)
 * [Network Privacy](network-privacy.md)
