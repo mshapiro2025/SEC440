@@ -6,3 +6,4 @@ coverY: 0
 
 # SEC440: Systems Security
 
+This contains my lecture notes, reading notes, and lab notes from SEC440: Systems Security. Notes will be organized with headers according to which information source they correspond to. Commands for systems will be written within code blocks.&#x20;
