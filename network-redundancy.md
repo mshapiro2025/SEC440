@@ -261,6 +261,10 @@ sudo nmtui
 # set network
 reboot
 ping -c1 8.8.8.8
+sudo yum install httpd
+sudo nano /var/www/html/index.html
+sudo systemctl enable httpd
+sudo systemctl start httpd
 ```
 
 <figure><img src=".gitbook/assets/image (9).png" alt=""><figcaption><p>web01 networking</p></figcaption></figure>
@@ -325,11 +329,11 @@ save
 
 ### Installing and Configuring SSH
 
-#### xubuntu-LAN
+#### xubuntu-WAN
 
 ```
 ssh-keygen -t rsa
-ssh-copy-id shapiro@10.0.5.100
+ssh-copy-id shapiro@10.0.17.113
 ```
 
 #### web01
