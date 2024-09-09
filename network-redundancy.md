@@ -225,7 +225,7 @@ reboot
 can now ping 8.8.8.8 (not google.com- DNS forwarding is not set up yet)
 ```
 
-<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption><p>xubuntu-wan networking</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (13).png" alt=""><figcaption><p>xubuntu-wan networking</p></figcaption></figure>
 
 ### XUbuntu-LAN
 
@@ -264,3 +264,98 @@ ping -c1 8.8.8.8
 ```
 
 <figure><img src=".gitbook/assets/image (9).png" alt=""><figcaption><p>web01 networking</p></figcaption></figure>
+
+### Configuring VRRP
+
+```
+# run on both vyos1 and vyos2
+set high-availability vrrp group WAN vrid 10
+set high-availability vrrp group WAN interface eth0
+set high-availability vrrp group WAN address 10.0.17.113/24
+set high-availability vrrp group LAN vrid 20
+set high-availability vrrp group LAN address 10.0.5.1/24
+set high-availability vrrp group LAN interface eth1
+set high-availability vrrp group OPT vrid 30
+set high-availability vrrp group OPT interface eth2
+ste high-availability vrrp group OPT address 10.0.6.1/24
+commit
+save
+run show vrrp
+```
+
+### Changing Network Configurations
+
+#### WEB01
+
+<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+#### xubuntu-lan
+
+<figure><img src=".gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+### Additional Firewall Configuration
+
+```
+# vyos1 and vyos2
+set service dns forwarding listen-address 10.0.5.1
+set service dns forwarding allow-from 10.0.5.0/24
+commit
+save
+set service dns forwarding listen-address 10.0.6.1
+set service dns forwarding allow-from 10.0.6.0/24
+commit
+save
+set nat destination rule 10 description "HTTP WEB01"
+set nat destination rule 10 destination port 80
+set nat destination rule 10 inbound-interface eth0
+set nat destination rule 10 protocol tcp
+set nat destination rule 10 translation address 10.0.5.100
+set nat destination rule 10 translation port 80
+commit
+save
+set nat destination rule 20 description "SSH WEB01"
+set nat destination rule 20 destination port 22
+set nat destination rule 20 inbound-interface eth0
+set nat destination rule 20 protocol tcp
+set nat destination rule 20 translation address 10.0.5.100
+set nat destination rule 20 translation port 22
+commit
+save
+```
+
+### Installing and Configuring SSH
+
+#### xubuntu-LAN
+
+```
+ssh-keygen -t rsa
+ssh-copy-id shapiro@10.0.5.100
+```
+
+#### web01
+
+```
+systemctl status sshd
+sudo nano /etc/ssh/sshd_config
+# change PermitRootLogin to no
+sudo dnf install epel-release
+sudo dnf install google-authenticator qrencode qrencode-libs
+google-authenticator -s ~/.ssh/google_authenticator
+restorecon -Rv ~/.ssh/
+sudo cp /etc/pam.d/sshd /etc/pam.d/sshd.bak
+sudo nano /etc/pam.d/sshd
+# add in auth [tab] required [tab] pam_google_authenticator.so secret=/home/${USER}/.ssh/google_authenticator nullok
+# add in auth [tab] required [tab] pam_permit.so
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+sudo nano /etc/ssh/sshd_config
+# change ChallengeResponseAuthentication to yes
+sudo systemctl restart sshd
+sudo nano /etc/ssh/sshd_config
+# add AuthenticationMethods publickey,password publickey,keyboard-interactive
+sudo nano /etc/pam.d/sshd
+# comment out auth substack password-auth
+sudo systemctl restart sshd
+```
+
+### Resources
+
