@@ -265,6 +265,8 @@ sudo yum install httpd
 sudo nano /var/www/html/index.html
 sudo systemctl enable httpd
 sudo systemctl start httpd
+sudo firewall-cmd --add-port=80/tcp --permanent
+sudo firewall-cmd --reload
 ```
 
 <figure><img src=".gitbook/assets/image (9).png" alt=""><figcaption><p>web01 networking</p></figcaption></figure>
