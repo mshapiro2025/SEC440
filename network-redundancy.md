@@ -363,5 +363,9 @@ sudo nano /etc/pam.d/sshd
 sudo systemctl restart sshd
 ```
 
-### Resources
+### Reflections
 
+* make sure VRID is unique on shared networks
+* remember firewalls exist on local hosts!
+  * firewall-cmd allows SSH by default but not HTTP
+* generate HTTP keys and copy them over before securing SSH
