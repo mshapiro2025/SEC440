@@ -113,7 +113,7 @@
 
 * configure network adapters
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 ```
 configure
@@ -163,7 +163,7 @@ show nat source rule 20
 
 * configure network adapters
 
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 configure
@@ -213,7 +213,7 @@ show nat source rule 20
 
 * check network adapters
 
-<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo adduser shapiro
@@ -225,13 +225,13 @@ reboot
 can now ping 8.8.8.8 (not google.com- DNS forwarding is not set up yet)
 ```
 
-<figure><img src=".gitbook/assets/image (13).png" alt=""><figcaption><p>xubuntu-wan networking</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (13) (1).png" alt=""><figcaption><p>xubuntu-wan networking</p></figcaption></figure>
 
 ### XUbuntu-LAN
 
 * change network adapters
 
-<figure><img src=".gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo adduser shapiro
@@ -244,13 +244,13 @@ reboot
 ping -c1 8.8.8.8
 ```
 
-<figure><img src=".gitbook/assets/image (7).png" alt=""><figcaption><p>xubuntu-lan networking</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (7) (1).png" alt=""><figcaption><p>xubuntu-lan networking</p></figcaption></figure>
 
 ### WEB01
 
 * change network adapter
 
-<figure><img src=".gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo adduser shapiro
@@ -269,7 +269,7 @@ sudo firewall-cmd --add-port=80/tcp --permanent
 sudo firewall-cmd --reload
 ```
 
-<figure><img src=".gitbook/assets/image (9).png" alt=""><figcaption><p>web01 networking</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (9) (1).png" alt=""><figcaption><p>web01 networking</p></figcaption></figure>
 
 ### Configuring VRRP
 
@@ -293,11 +293,11 @@ run show vrrp
 
 #### WEB01
 
-<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### xubuntu-lan
 
-<figure><img src=".gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Additional Firewall Configuration
 
