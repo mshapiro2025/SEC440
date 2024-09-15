@@ -115,6 +115,9 @@ sudo nano /etc/haproxy/haproxy.cfg
 # make changes to defaults section- mode and option to tcp
 # add frontend and backend sections
 sudo haproxy -f /etc/haproxy/haproxy.cfg -c
+sudo nano /etc/sysctl.conf
+# add net.ipv4.ip_nonlocal_bind=1
+sudo sysctl -p
 sudo systemctl start haproxy
 ```
 
@@ -162,6 +165,8 @@ save
 {% embed url="https://www.haproxy.com/documentation/haproxy-configuration-tutorials/core-concepts/backends/" %}
 
 {% embed url="https://www.digitalocean.com/community/tutorials/how-to-set-up-highly-available-haproxy-servers-with-keepalived-and-reserved-ips-on-ubuntu-14-04" %}
+
+{% embed url="https://serverfault.com/questions/377529/haproxy-cannot-bind-socket-for-proxy-on-a-remote-machine" %}
 
 ### Reflection
 
