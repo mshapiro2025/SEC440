@@ -146,6 +146,15 @@ sudo nano /etc/keepalived/keepalived.conf
 
 <figure><img src=".gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
+### VYOS
+
+```
+delete nat destination rule 10 translation address 10.0.5.100
+set nat destination rule 10 translation address 10.0.16.10
+commit
+save
+```
+
 ### Resources
 
 {% embed url="https://www.digitalocean.com/community/questions/navigating-high-availability-with-keepalived" %}
