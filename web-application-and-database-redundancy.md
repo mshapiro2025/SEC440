@@ -124,15 +124,39 @@
 
 <figure><img src=".gitbook/assets/{8EE665E6-563B-4435-B1A7-D90DAE39DA46}.png" alt=""><figcaption></figcaption></figure>
 
-```
-sudo adduser shapiro
+<pre><code>sudo adduser shapiro
 sudo usermod -aG sudo shapiro
 sudo hostnamectl set-hostname u1-shapiro/u2-shapiro/u3-shapiro
 sudo nano /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 reboot
-```
+sudo apt-get update
+sudo apt-get install mariadb-server
+<strong>sudo systemctl start mariadb
+</strong>sudo systemctl enable mariadb
+</code></pre>
 
 <figure><img src=".gitbook/assets/{CC2FBC75-A43A-4D14-A782-403BB2C8B719}.png" alt=""><figcaption><p>/etc/netplan/00-installer-config.yaml for u1-shapiro</p></figcaption></figure>
 
 <figure><img src=".gitbook/assets/{C7F32521-8342-452B-B861-0999C14FF291}.png" alt=""><figcaption><p>/etc/netplan/00-installer-config.yaml for u2-shapiro</p></figcaption></figure>
+
+<figure><img src=".gitbook/assets/{63562FB7-28FD-429C-81CB-8F905B0598BF}.png" alt=""><figcaption><p>/etc/netplan/00-installer-config.yaml for u3-shapiro</p></figcaption></figure>
+
+### Configuring Galera
+
+```
+sudo systemctl stop mariadb
+sudo nano /etc/mysql/mariadb.conf.d/60-galera.cnf
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+# change bind-address to 0.0.0.0
+sudo apt install rsync
+# when done, only on u1-shapiro
+sudo galera_new_cluster
+# on u2 and u3
+```
+
+<figure><img src=".gitbook/assets/{3BFFF507-F2BB-4D38-B4E7-1BE2528EF506}.png" alt=""><figcaption><p>/etc/mysql/mariadb.conf.d/60-galera.cnf on u1</p></figcaption></figure>
+
+<figure><img src=".gitbook/assets/{8EC8BFE7-A192-4C14-9C3A-8DEAD87AF89D}.png" alt=""><figcaption><p>/etc/mysql/mariadb.conf.d/60-galera.cnf on u2</p></figcaption></figure>
+
+<figure><img src=".gitbook/assets/{10950538-F889-460F-A956-A26BC489FA27}.png" alt=""><figcaption><p>/etc/mysql/mariadb.conf.d/60-galera.cnf on u3</p></figcaption></figure>
