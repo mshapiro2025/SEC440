@@ -153,10 +153,11 @@ sudo apt install rsync
 # when done, only on u1-shapiro
 sudo galera_new_cluster
 # on u2 and u3
+sudo systemctl start mariadb
 ```
 
-<figure><img src=".gitbook/assets/{3BFFF507-F2BB-4D38-B4E7-1BE2528EF506}.png" alt=""><figcaption><p>/etc/mysql/mariadb.conf.d/60-galera.cnf on u1</p></figcaption></figure>
+<figure><img src=".gitbook/assets/Screenshot 2024-09-25 at 12.29.08 PM.png" alt=""><figcaption><p>60-galera.cnf on u1</p></figcaption></figure>
 
-<figure><img src=".gitbook/assets/{8EC8BFE7-A192-4C14-9C3A-8DEAD87AF89D}.png" alt=""><figcaption><p>/etc/mysql/mariadb.conf.d/60-galera.cnf on u2</p></figcaption></figure>
+<figure><img src=".gitbook/assets/Screenshot 2024-09-25 at 12.29.35 PM.png" alt=""><figcaption><p>60-galera.cnf on u2</p></figcaption></figure>
 
-<figure><img src=".gitbook/assets/{10950538-F889-460F-A956-A26BC489FA27}.png" alt=""><figcaption><p>/etc/mysql/mariadb.conf.d/60-galera.cnf on u3</p></figcaption></figure>
+<figure><img src=".gitbook/assets/Screenshot 2024-09-25 at 12.30.01 PM.png" alt=""><figcaption><p>60-galera.cnf on u3</p></figcaption></figure>
