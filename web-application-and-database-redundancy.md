@@ -179,5 +179,5 @@ sudo systemctl restart haproxy
 sudo dnf install php
 sudo dnf install php-mysqlnd php-gd php-intl
 sudo systemctl restart httpd
-
+sudo dnf install mariadb
 ```
