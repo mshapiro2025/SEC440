@@ -31,7 +31,7 @@
 * snapshot
 * set network adapter to OPT
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo adduser shapiro
@@ -42,7 +42,7 @@ sudo nano /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 ```
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### HA2 Config
 

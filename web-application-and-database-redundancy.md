@@ -161,3 +161,23 @@ sudo systemctl start mariadb
 <figure><img src=".gitbook/assets/Screenshot 2024-09-25 at 12.29.35 PM.png" alt=""><figcaption><p>60-galera.cnf on u2</p></figcaption></figure>
 
 <figure><img src=".gitbook/assets/Screenshot 2024-09-25 at 12.30.01 PM.png" alt=""><figcaption><p>60-galera.cnf on u3</p></figcaption></figure>
+
+### Configuring HAProxy for Galera Cluster
+
+#### HA1 and HA2
+
+```
+sudo nano /etc/haproxy/haproxy.cfg
+sudo systemctl restart haproxy
+```
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption><p>addition to /etc/haproxy/haproxy.cfg on ha1 and ha2</p></figcaption></figure>
+
+### Web Application Setup: WEB01 and WEB02
+
+```
+sudo dnf install php
+sudo dnf install php-mysqlnd php-gd php-intl
+sudo systemctl restart httpd
+
+```
