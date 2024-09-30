@@ -180,4 +180,14 @@ sudo dnf install php
 sudo dnf install php-mysqlnd php-gd php-intl
 sudo systemctl restart httpd
 sudo dnf install mariadb
+sudo nano birthday.html
+sudo nano birthday.php
+sudo nano submit.html
+sudo nano submit.php
+# on WEB01
+scp file.html/php shapiro@10.0.5.101:~ (for all new web server files)
+# on WEB02
+sudo cp ~/* /var/www/html/
+# on both
+sudo systemctl restart httpd
 ```
