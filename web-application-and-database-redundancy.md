@@ -191,3 +191,48 @@ sudo cp ~/* /var/www/html/
 # on both
 sudo systemctl restart httpd
 ```
+
+## Reflection
+
+Problem 1: MariaDB users are created using plaintext passwords and are logged into using plaintext passwords. The passwords are not stored in plaintext, but they can be seen in the terminal history. This allows for easy access to the SQL database if access to the host user is gained.&#x20;
+
+<figure><img src=".gitbook/assets/image (18).png" alt=""><figcaption><p>encoded password stored in mariadb</p></figcaption></figure>
+
+Solution: Enable 2FA with auth\_option settings as defined in the MySQL documentation, and create a MySQL-compatible hash to assign directly to the user as defined in the Server Fault discussion. (An alternative to this step could be utilizing the RANDOM PASSWORD option in MySQL.) The steps to this would be:
+
+1. Choose password.
+2. Use Python script from Server Fault discussion to generate a MySQL password hash based off of that password. I would also recommend modifying the script to generate a random password, which could be saved to a secure file to later be deleted or printed once to the console.
+3. Copy the hash generated and use it in the CREATE USER function as follows: CREATE USER "username" IDENTIFIED BY "password hash" AND auth\_plugin, where auth\_plugin is the additional chosen 2FA option.
+
+{% embed url="https://dev.mysql.com/doc/refman/8.4/en/create-user.html" %}
+
+{% embed url="https://serverfault.com/questions/844919/how-can-i-change-a-mysql-user-password-without-typing-it-visibly-on-the-console" %}
+
+Problem 2: MariaDB credentials are passed in plaintext in the web server PHP files, giving remote access to the SQL databases if the web server is compromised.&#x20;
+
+Solution: Protect the PHP file with the passwords in the following ways. Based on research, it seems that there is no alternative to plaintext credentials being passed through PHP to the SQL database, but there are ways to protect the file with the plaintext credentials.
+
+1. Store the password outside of the web root directory (usually /var/www/html). This makes it more difficult for threat actors to access the file through methods like directory traversal, especially when many web hosting methods have anti-directory traversal safeguards in place to disallow navigating outside of the web root directory from the webpage.
+2. Use separation of permissions and the principle of least privilege by creating separate MariaDB users for each use case that only have access to the resources they need, and nothing else.
+3. Give each user a unique password with no logical connection to other users' passwords.
+4. Change the password regularly and follow password restrictions (like identified in the previous problem and solution).&#x20;
+
+{% embed url="https://stackoverflow.com/questions/46897705/why-mysqli-connect-must-receive-the-password-parameter-with-no-encryption" %}
+
+Problem 3: There is no file replication in place for the two Apache servers. HAProxy serves as a load balancer, but it does not copy files between Apache servers.&#x20;
+
+Solution: Use LSyncD on the web root directory (/var/www/html) to watch for changes and sync them with rsync, as seen below:
+
+```
+sudo yum install lsyncd
+sudo yum install rsync
+sudo nano /root/vhostsync.sh
+# create script to periodically reload HTTPD
+sydo nano /etc/lsyncd.conf
+# modify configuration file to specify source and target directories, as well as hosts and the vhostsync.sh script
+sudo systemctl enable lsyncd
+sudo systemctl start lsyncd
+
+```
+
+{% embed url="https://www.liquidweb.com/blog/how-to-sync-two-apache-web-servers/" %}
