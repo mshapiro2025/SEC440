@@ -232,7 +232,6 @@ sydo nano /etc/lsyncd.conf
 # modify configuration file to specify source and target directories, as well as hosts and the vhostsync.sh script
 sudo systemctl enable lsyncd
 sudo systemctl start lsyncd
-
 ```
 
 {% embed url="https://www.liquidweb.com/blog/how-to-sync-two-apache-web-servers/" %}
