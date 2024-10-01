@@ -190,6 +190,7 @@ scp file.html/php shapiro@10.0.5.101:~ (for all new web server files)
 sudo cp ~/* /var/www/html/
 # on both
 sudo systemctl restart httpd
+sudo setsebool -P httpd_can_network_connect_db on
 ```
 
 ## Reflection
