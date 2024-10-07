@@ -154,6 +154,13 @@ sudo apt install rsync
 sudo galera_new_cluster
 # on u2 and u3
 sudo systemctl start mariadb
+# on all
+sudo mariadb-secure-installation
+mysql -u root -p
+CREATE USER 'webuser'@'10.0.6.11' IDENTIFIED BY '[password]';
+GRANT ALL PRIVILEGES ON PETS.* to 'webuser'@'10.0.6.11' IDENTIFIED BY '[password];'
+CREATE USER 'webuser'@'10.0.6.12' IDENTIFIED BY '[password]';
+GRANT ALL PRIVILEGES ON PETS.* to 'webuser'@'10.0.6.12' IDENTIFIED BY '[password];'
 ```
 
 <figure><img src=".gitbook/assets/Screenshot 2024-09-25 at 12.29.08 PM.png" alt=""><figcaption><p>60-galera.cnf on u1</p></figcaption></figure>
