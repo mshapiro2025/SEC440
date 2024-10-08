@@ -47,3 +47,58 @@
 * however, by default, WinRM listener may not be configured, even if WinRM is running
   * Windows Defender may block ports
   * Windows 10/11 needs some help to be managed by WAC
+
+## Lab Notes: VM Cleanup
+
+### VYOS01
+
+```
+delete high-availability vrrp group WAN
+delete high-availability vrrp group LAN
+delete high-availability vrrp group OPT
+delete interfaces ethernet eth1 address 10.0.5.2/24
+delete interfaces ethernet eth2 address 10.0.6.2/24
+set interfaces ethernet eth1 address 10.0.5.1/24
+set interfaces ethernet eth2 address 10.0.6.1/24
+```
+
+### AD01 Configuration
+
+* snapshot
+* switch network adapter to LAN
+
+<figure><img src=".gitbook/assets/{2B31BE9E-F6CD-4CD4-8780-82DAD97F5887}.png" alt=""><figcaption></figcaption></figure>
+
+* sconfig: make sure updates are turned to Manual
+* Network and Internet Settings -> Network and Sharing Center -> Ethernet -> Properties -> IPv4 -> Properties
+
+<figure><img src=".gitbook/assets/{339DCEF2-6E84-44FF-B69F-649469FAB876}.png" alt=""><figcaption></figcaption></figure>
+
+* Settings -> System -> About -> Rename this PC
+
+```
+Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+Install-ADDSForest -DomainName shapiro.local
+```
+
+* Server Manager -> Tools -> Active Directory Users and Computers -> shapiro.local -> New -> User
+* Add to group -> Domain Admin
+
+### FS01 Configuration
+
+* snapshot
+* change network adapter to LAN
+
+<figure><img src=".gitbook/assets/{29E7A969-F5A4-4CB5-835F-89A186693232}.png" alt=""><figcaption></figcaption></figure>
+
+* sconfig
+  * Network Settings
+    * IP address
+    * DNS server
+  * hostname
+  * join domain
+
+<figure><img src=".gitbook/assets/{744CEB1B-F8B7-421C-99EC-2213B59CDFFA}.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src=".gitbook/assets/{3D1B9119-E24F-443D-807F-60D5C05B88D5}.png" alt=""><figcaption></figcaption></figure>
+
