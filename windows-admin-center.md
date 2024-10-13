@@ -82,7 +82,8 @@ Install-ADDSForest -DomainName shapiro.local
 ```
 
 * Server Manager -> Tools -> Active Directory Users and Computers -> shapiro.local -> New -> User
-* Add to group -> Domain Admin
+  * Add to group -> Domain Admin
+* Server Manager -> Tools -> DNS -> Reverse Lookup Zones -> New Zone
 
 ### FS01 Configuration
 
@@ -100,5 +101,26 @@ Install-ADDSForest -DomainName shapiro.local
 
 <figure><img src=".gitbook/assets/{744CEB1B-F8B7-421C-99EC-2213B59CDFFA}.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src=".gitbook/assets/{3D1B9119-E24F-443D-807F-60D5C05B88D5}.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/Screenshot 2024-10-13 at 9.54.16 AM.png" alt=""><figcaption></figcaption></figure>
 
+### Configuring WKS01
+
+* Network and Internet Settings -> Network and Sharing Center -> Ethernet -> Properties -> IPv4 -> Properties
+
+<figure><img src=".gitbook/assets/Screenshot 2024-10-13 at 9.58.37 AM.png" alt=""><figcaption></figcaption></figure>
+
+* Settings -> System -> About -> Rename this PC
+* Settings -> System -> Accounts -> Access work or school -> Join this device to a local Active Directory domain
+
+### Windows Admin Center - FS01
+
+```
+powershell
+Invoke-WebRequest 'http://aka.ms/WACDownload' -OutFile WAC.msi
+msiexec /i WAC.msi /qn /L*v log.txt SME_PORT=443 SSL_CERTIFICATE_OPTION=generate
+```
+
+### Configuring WAC
+
+* Settings -> Extensions -> Active Directory -> Install
+  * DNS -> Install
