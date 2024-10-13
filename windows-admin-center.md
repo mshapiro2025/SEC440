@@ -139,3 +139,12 @@ $Path = $env:TEMP; $Installer = 'chrome_installer.exe'; Invoke-WebRequest -Uri '
 winrm quickconfig
 ```
 
+* Local Group Policy Editor -> Computer Configuration -> Administrative Templates -> Windows Components -> Windows Remote Management -> WinRM Service
+  * Allow remote server management
+  * Allow Basic authentication
+* WinRM Client
+  * Allow Basic authentication
+
+{% embed url="https://techcommunity.microsoft.com/t5/windows-admin-center/your-credentials-didn-t-work-try-again/m-p/2091578" %}
+
+<figure><img src=".gitbook/assets/Screenshot 2024-10-13 at 11.51.41 AM.png" alt=""><figcaption></figcaption></figure>
