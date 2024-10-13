@@ -120,7 +120,22 @@ Invoke-WebRequest 'http://aka.ms/WACDownload' -OutFile WAC.msi
 msiexec /i WAC.msi /qn /L*v log.txt SME_PORT=443 SSL_CERTIFICATE_OPTION=generate
 ```
 
-### Configuring WAC
+### Additional Tasks
+
+#### Configuring WAC
 
 * Settings -> Extensions -> Active Directory -> Install
   * DNS -> Install
+
+#### Installing Chrome on AD
+
+```
+$Path = $env:TEMP; $Installer = 'chrome_installer.exe'; Invoke-WebRequest -Uri 'http://dl.google.com/chrome/install/375.126/chrome_installer.exe' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args '/silent /install' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer
+```
+
+#### Remote Management for WKS01
+
+```
+winrm quickconfig
+```
+
