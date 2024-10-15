@@ -132,3 +132,70 @@
   * getsebool
   * setsebool
   * togglesebool
+
+## Lab Notes: SELinux Red Hat Labs
+
+### Guided Exercise: Change the SELinux Enforcement Mode
+
+#### workstation
+
+```
+lab start selinux-opsmode
+ssh student@serverea
+sudo -i
+# see SELINUX mode
+getenforce
+# edit SELINUX config file to change mode to 
+nano /etc/selinux/config
+# change SELINUX parameter from enforcing to permissive
+grep '^SELINUX' /etc/selinux/config
+setenforce 0
+getenforce
+# change SELINUX back to enforcing
+nano /etc/selinux/config
+# change SELINUX parameter from passive to enforcing
+setenforce 1
+getenforce
+systemctl reboot
+ssh student@servera
+sudo -i
+getenforce
+exit
+exit
+lab finish selinux-opsmode
+```
+
+### Guided Exercise: Control SELinux File Contexts
+
+#### workstation
+
+```
+lab start selinux-filecontexts
+ssh student@servera
+sudo -i
+# configure apache to use a non-standard document directory
+mkdir /custom
+echo 'This is SERVERA' > /custom/index.html
+nano /etc/httpd/conf/httpd.conf
+# change DocumentRoot to "/custom" and <Directory "/custom">
+systemctl enable --now httpd
+systemctl status httpd
+semanage fcontext -a \
+> -t httpd_sys_content_t '/custom(/.*)?'
+restorecon -Rv /custom
+exit
+exit
+lab finish selinux-filecontexts
+```
+
+### Guided Exercise: Adjust SELinux Policy with Booleans
+
+#### workstation
+
+```
+lab start selinux-booleans
+ssh student@servera
+sudo -i
+nano httpd/conf.d/userdir.conf
+```
+
