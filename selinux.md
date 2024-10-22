@@ -137,8 +137,6 @@
 
 ### Guided Exercise: Change the SELinux Enforcement Mode
 
-#### workstation
-
 ```
 lab start selinux-opsmode
 ssh student@serverea
@@ -167,8 +165,6 @@ lab finish selinux-opsmode
 
 ### Guided Exercise: Control SELinux File Contexts
 
-#### workstation
-
 ```
 lab start selinux-filecontexts
 ssh student@servera
@@ -189,8 +185,6 @@ lab finish selinux-filecontexts
 ```
 
 ### Guided Exercise: Adjust SELinux Policy with Booleans
-
-#### workstation
 
 ```
 lab start selinux-booleans
