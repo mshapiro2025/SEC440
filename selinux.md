@@ -196,6 +196,56 @@ lab finish selinux-filecontexts
 lab start selinux-booleans
 ssh student@servera
 sudo -i
-nano httpd/conf.d/userdir.conf
+nano /etc/httpd/conf.d/userdir.conf
+# comment out UserDir disabled in IfModule mod_userdir.c
+# uncomment UserDir public_html in IfModule mod_userdir.c
+systemctl enable --now httpd
+# open another terminal
+ssh student@servera
+mkdir ~/public_html
+echo 'This is student content on SERVERA.' > ~/public_html/index.html
+chmod 711 ~
+ls -ld ~
+# go back to other terminal
+getsebool -a | grep home
+setsebool -P httpd_enable_homedirs on
+exit
+exit
+lab finish selinux-booleans
 ```
+
+### Guided Exercise: Investigate and Resolve SELinux Issues
+
+```
+lab start selinux-issues
+ssh student@servera
+sudo -i
+less /var/log/messages
+# search for SELinux is preventing /usr/sbin/httpd from getattr access on the file /custom/index.html. For complete SELinux messages run: sealert -l [alert ID]
+sealert -l [alert ID]
+ls -ldZ /var/www/html
+ausearch -m AVC -ts today
+semanage fcontext -a -t httpd_sys_content_t '/custom(/.*)?'
+restorecon -Rv /custom
+exit
+exit
+lab finish selinux-issues
+```
+
+### Lab: Manage SELinux Security
+
+<pre><code>lab start selinux-review
+ssh student@serverb
+sudo -i
+less /var/log/messages
+sealert -l [alert ID]
+ls -ldZ /var/www/html
+ls -ldZ /lab-content/lab.html
+semanage fcontext -a -t httpd_sys_content_t '/lab-content.lab.html'restorecon -Rv /custom
+restorecon -Rv /custom
+<strong>exit
+</strong>exit
+lab grade selinux-review
+lab finish selinux-review
+</code></pre>
 
