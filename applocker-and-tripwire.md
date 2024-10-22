@@ -1,2 +1,0 @@
-# AppLocker and Tripwire
-
