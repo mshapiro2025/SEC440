@@ -94,3 +94,4 @@
 ### Filtering
 
 * cat \[file].log | zeek-cut \[field 1] \[field 2] \[field 3]
+* can add sort -r | uniq -c to sort for unique values in a field
