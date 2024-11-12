@@ -8,3 +8,4 @@
 * [SELinux](selinux.md)
 * [Event Tracing for Windows](event-tracing-for-windows.md)
 * [Threat Simulation: Command and Control](threat-simulation-command-and-control.md)
+* [Zeek](zeek.md)
