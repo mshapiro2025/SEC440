@@ -72,3 +72,25 @@
   * unusual or exceptional activity that can indicated malformed connections or traffic that doesn't conform to a particular protocol
 * notice.log
   * identifies specific activity that Zeek recognizes as potentially interesting, odd, or bad
+
+### Using Zeek
+
+* monitoring live network traffic
+  * zeek -i \[interface]
+* analyzing captures
+  * zeek -Cr capture.pcap
+
+### Calling Scripts
+
+* default searching paths
+  * current working directory
+  * $PREFIX/share/zeek
+  * $PREFIX/share/policy
+  * $PREFIX/share/site
+* zeek -Cr capture.pcap script.bro
+* zeek -Cr capture.pcap /path/to/scripts
+  * must have \_\_load\_\_.bro defined to say what the scripts to load are
+
+### Filtering
+
+* cat \[file].log | zeek-cut \[field 1] \[field 2] \[field 3]
