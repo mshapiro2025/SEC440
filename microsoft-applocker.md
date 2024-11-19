@@ -56,3 +56,17 @@
 
 * does not provide protections against files already opened in memory for non-execute
 * not suitable for businesses where application installation is not centralized and goes through an approval process
+
+## Lab Notes: Working with AppLocker
+
+### AD01
+
+* Group Policy Management -> Run as administrator -> Forest -> Domains -> shapiro.local -> New Organizational Unit -> name it AppLocker
+* Applocker OU -> Create a new GPO and link it here -> Edit GPO -> Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Application Control Policies -> AppLocker
+* Configure rule enforcement -> check all rules
+* right click rule types to create rules
+
+### WKS01
+
+* services.msc as admin -> start Application Identity service
+* cmd as admin -> gpupdate /force
