@@ -10,3 +10,4 @@
 * [Threat Simulation: Command and Control](threat-simulation-command-and-control.md)
 * [Zeek](zeek.md)
 * [Microsoft AppLocker](microsoft-applocker.md)
+* [Linux Rootkits](linux-rootkits.md)
